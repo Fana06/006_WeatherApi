@@ -10,6 +10,71 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<main class="stage">
+  <header class="top">
+    <h1>Kompas Lokasi</h1>
+    <p>Ketik nama tempat, lalu tekan tombol <b>Cari lokasi</b>. Anda akan melihat negara, provinsi, kecamatan, dan titik koordinatnya.</p>
+  </header>
+
+  <form id="searchForm" class="search" autocomplete="off">
+    <label for="place">Lokasi yang dicari</label>
+    <div class="row">
+      <input id="place" type="text" maxlength="100" placeholder="Contoh: Kasihan, Bantul" required>
+      <button type="submit" id="goBtn">Cari lokasi</button>
+    </div>
+    <div class="examples">
+      <span>Coba contoh:</span>
+      <button type="button" class="chip" data-q="Kasihan, Bantul">Kasihan, Bantul</button>
+      <button type="button" class="chip" data-q="Yogyakarta">Yogyakarta</button>
+      <button type="button" class="chip" data-q="Bandung">Bandung</button>
+      <button type="button" class="chip" data-q="Tokyo">Tokyo</button>
+    </div>
+  </form>
+
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+
+  <div id="candidatesWrap" hidden>
+    <p class="hint">Ada beberapa hasil. Pilih yang paling sesuai:</p>
+    <div id="candidates" class="candidates"></div>
+  </div>
+
+  <section class="result" id="result" hidden>
+    <div class="dial" aria-hidden="true">
+      <div class="ring"></div>
+      <div class="needle" id="needle"></div>
+      <div class="hub"></div>
+    </div>
+
+    <ol class="ladder">
+      <li><span class="k">Negara</span><strong id="negara">-</strong></li>
+      <li><span class="k">Provinsi</span><strong id="provinsi">-</strong></li>
+      <li><span class="k">Kabupaten / Kota</span><strong id="kabupaten">-</strong></li>
+      <li><span class="k">Kecamatan</span><strong id="kecamatan">-</strong></li>
+    </ol>
+
+    <div class="coordbox">
+      <dl class="coords">
+        <div><dt>Longitude (bujur)</dt><dd id="lon">-</dd></div>
+        <div><dt>Latitude (lintang)</dt><dd id="lat">-</dd></div>
+      </dl>
+      <div class="actions">
+        <button type="button" id="copyBtn" class="ghost">Salin koordinat</button>
+        <a id="gmaps" class="ghost" href="#" target="_blank" rel="noopener">Buka di Google Maps</a>
+      </div>
+    </div>
+
+    <img id="mapImg" class="map" alt="Peta lokasi hasil pencarian" hidden>
+
+    <details class="raw" open>
+      <summary>Data mentah dari API (untuk bukti screenshot)</summary>
+      <pre id="raw"></pre>
+    </details>
+    <details class="raw">
+      <summary>Semua tingkat wilayah yang dikirim API</summary>
+      <ul id="levels" class="levels"></ul>
+    </details>
+  </section>
+</main>
 <script src="script.js"></script>
 </body>
 </html>
